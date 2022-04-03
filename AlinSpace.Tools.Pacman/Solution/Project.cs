@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace AlinSpace.Tools.Pacman.Solution
 {
@@ -28,6 +29,8 @@ namespace AlinSpace.Tools.Pacman.Solution
             return false;
         }
 
+        public string Icon { get; set; }
+
         public string Author { get; set; }
 
         public string Copyright { get; set; }
@@ -43,15 +46,16 @@ namespace AlinSpace.Tools.Pacman.Solution
             Console.WriteLine("  Building project and package ...");
 
             Environment.SetEnvironmentVariable("MSBuildSDKsPath", "C:\\Program Files\\dotnet\\sdk\\6.0.200\\Sdks");
+            Environment.SetEnvironmentVariable("MSBUILD_EXE_PATH ", "C:\\Program Files\\dotnet\\sdk\\6.0.200\\Sdks");
 
             var project = new Microsoft.Build.Evaluation.Project(ProjectFilePath);
-            project.SetGlobalProperty("Configuration", "Release");
+            //project.SetGlobalProperty("Configuration", "Release");
             project.Build();
         }
 
         public string GetNugetFilePath()
         {
-            return "";
+            return Path.Combine(ProjectFilePath, "bin", "release", $"{Name}.{Version}.nupkg");
         }
     }
 }

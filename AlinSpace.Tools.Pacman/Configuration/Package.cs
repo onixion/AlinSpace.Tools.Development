@@ -10,6 +10,8 @@
 
         public bool? AutoIncrementVersion { get; set; }
 
+        public string Icon { get; set; }
+
         public string Author { get; set; }
 
         public string Copyright { get; set; }

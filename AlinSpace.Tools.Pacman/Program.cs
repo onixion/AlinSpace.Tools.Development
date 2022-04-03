@@ -27,7 +27,6 @@ namespace AlinSpace.Tools.Pacman
             Console.WriteLine($"Found {solution.Projects.Count} projects(s) in configuration.");
 
             var pathToSolutionFile = configuration.PathToSolutionFile;
-
             var pathToSolution = Path.GetDirectoryName(pathToSolutionFile);
 
             Console.WriteLine();
@@ -50,7 +49,7 @@ namespace AlinSpace.Tools.Pacman
                 }
 
                 // todo try to build
-                //project.Build();
+                project.Build();
 
                 // try to push to nuget package provider
 

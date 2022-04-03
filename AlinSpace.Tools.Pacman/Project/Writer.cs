@@ -145,6 +145,22 @@ namespace AlinSpace.Tools.Pacman.Project
 
             #endregion
 
+            #region Icon
+
+            var packageIconNode = propertyGroupNode.SelectSingleNode("PackageIcon");
+
+            if (packageIconNode == null)
+            {
+                packageIconNode = document.CreateElement("PackageIcon");
+                propertyGroupNode.AppendChild(packageIconNode);
+            }
+
+            packageIconNode.InnerText = project.Icon != null ? project.Icon?.Trim() : project.Parent.Icon?.Trim();
+
+            Console.WriteLine($"  PackageIcon = {packageIconNode.InnerText}");
+
+            #endregion
+
             document.Save(project.ProjectFilePath);
         }
     }
