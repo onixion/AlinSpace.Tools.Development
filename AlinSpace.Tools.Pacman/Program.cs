@@ -9,7 +9,7 @@ namespace AlinSpace.Tools.Pacman
         public static void Main(string[] args)
         {
             var pathToConfiguration = args.FirstOrDefault() ?? "pacman.json";
-            
+
             if (!Configuration.Reader.TryReadFromJsonFile(pathToConfiguration, out var configuration))
             {
                 Configuration.Writer.WriteToJsonFile(pathToConfiguration, new Configuration.Configuration()
@@ -20,6 +20,23 @@ namespace AlinSpace.Tools.Pacman
                 Console.WriteLine($"Warning: No configuration file found.");
                 Console.WriteLine($"Created new configuration file at: {pathToConfiguration}");
                 return;
+            }
+
+            if (Path.IsPathRooted(pathToConfiguration))
+            {
+                configuration.PathToSolutionFile = Path.Combine(
+                    Path.GetDirectoryName(pathToConfiguration),
+                    configuration.PathToSolutionFile);
+            }
+            else
+            {
+                string exeFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string exeWorkPath = Path.GetDirectoryName(exeFilePath);
+
+                configuration.PathToSolutionFile = Path.Combine(
+                    exeWorkPath,
+                    Path.GetDirectoryName(pathToConfiguration),
+                    configuration.PathToSolutionFile);
             }
 
             var solution = Mapper.Provider.Mapper.Map<Solution.Solution>(configuration);
@@ -49,7 +66,7 @@ namespace AlinSpace.Tools.Pacman
                 }
 
                 // todo try to build
-                project.Build();
+                //project.Build();
 
                 // try to push to nuget package provider
 
