@@ -10,6 +10,11 @@ namespace AlinSpace.Tools.Pacman
         {
             var pathToConfiguration = args.FirstOrDefault() ?? "pacman.json";
 
+            if (!Path.IsPathRooted(pathToConfiguration))
+            {
+                pathToConfiguration = Path.Combine(Environment.CurrentDirectory, pathToConfiguration);
+            }
+
             if (!Configuration.Reader.TryReadFromJsonFile(pathToConfiguration, out var configuration))
             {
                 Configuration.Writer.WriteToJsonFile(pathToConfiguration, new Configuration.Configuration()
