@@ -6,7 +6,7 @@ This command-line tool should always be called from the solution directory (wher
 
 Note: This tool requires a local folder as a nuget feed for development purposes.
 
-## Solution and Projects
+## Why?
 
 Most solutions will contain **a couple of projects**. And those projects will **directly reference each other**. This works nicely.
 
