@@ -1,11 +1,12 @@
 # AlinSpace.Tools.Development
-.NET development tool.
+
+## A .NET development tool.
 
 This command-line tool should always be called from the solution directory (where the .sln file is located).
 
 Note: This tool requires a local folder as a nuget feed for development purposes.
 
-# Project dependencies
+## Solution and Projects
 
 Most solutions will contain **a couple of projects**. And those projects will **directly reference each other**. This works nicely.
 
