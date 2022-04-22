@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace AlinSpace.Tools.Pacman
 {
+    /// <summary>
+    /// 
+    /// update AlinSpace.Zen
+    /// </summary>
     public static class Program
     {
         public static void Main(string[] args)

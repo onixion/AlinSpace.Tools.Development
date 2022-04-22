@@ -1,4 +1,6 @@
-﻿namespace AlinSpace.Tools.Pacman.Configuration
+﻿using System;
+
+namespace AlinSpace.Tools.Pacman.Configuration
 {
     public class Package
     {
@@ -6,9 +8,7 @@
 
         public string ProjectFilePath { get; set; }
 
-        public string Version { get; set; }
-
-        public bool? AutoIncrementVersion { get; set; }
+        public Version Version { get; set; }
 
         public string Icon { get; set; }
 
