@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AlinSpace.Tools.Development": {
+      "commandName": "Project",
+      "commandLineArgs": "project update AlinSpace.Zen"
+    }
+  }
+}

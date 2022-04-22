@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AlinSpace.ProjectManipulator" Version="1.0.0" />
+    <PackageReference Include="AlinSpace.ProjectManipulator" Version="1.0.9" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Microsoft.Build" Version="17.1.0" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.1.0" />
