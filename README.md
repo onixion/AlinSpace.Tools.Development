@@ -16,6 +16,8 @@ This tool tries to automate this process.
 
 # Getting started
 
+Build the tool and make it accessible to the command line interface.
+
 Go to the solution folder.
 Then execute the tool:
 
@@ -24,7 +26,8 @@ AlinSpace.Tools.Development
 ```
 
 The file **AlinSpace.Tools.Development.json** will be created.
-Configure:
+
+Now configure it for your setup:
 
 ``` json
 {
