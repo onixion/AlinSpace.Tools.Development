@@ -46,11 +46,15 @@ The project command helps with managing a project.
 
 Updates the project meta data. It reads the configuration and applies the changes to the project file.
 
+```
+AlinSpace.Tools.Development project update info
+```
+
 ### Build
 
 The update command will **increment the build number** of the given project of the solution, build it and copy the nupkg file to the local nuget folder.
 Additionally, it will **recursively find all dependent projects**, **increase their build number**, build them and copy their nupgk files to the local nuget folder.
 
 ```
-AlinSpace.Tools.Development project update MyProject
+AlinSpace.Tools.Development project update build <PROJECT-NAME>
 ```
