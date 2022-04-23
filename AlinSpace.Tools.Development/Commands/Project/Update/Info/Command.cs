@@ -65,7 +65,7 @@ namespace AlinSpace.Tools.Development.Commands.Project.Update.Info
 
             #region PackageTags
 
-            var tags = $"{context.Configuration.Tags?.Trim(' ', ',') ?? ""}, {projectConfiguration.Tags?.Trim(' ', ',') ?? ""}".Trim(' ', ',');
+            var tags = $"{context.Configuration.Tags?.Trim(' ', ';') ?? ""}, {projectConfiguration.Tags?.Trim(' ', ';') ?? ""}".Trim(' ', ';');
 
             if (!string.IsNullOrWhiteSpace(tags))
             {
@@ -80,7 +80,7 @@ namespace AlinSpace.Tools.Development.Commands.Project.Update.Info
 
             if (string.IsNullOrWhiteSpace(packageProjectUrl))
             {
-                authors = projectConfiguration.PackageProjectUrl;
+                packageProjectUrl = projectConfiguration.PackageProjectUrl;
             }
 
             if (!string.IsNullOrWhiteSpace(packageProjectUrl))
@@ -96,7 +96,7 @@ namespace AlinSpace.Tools.Development.Commands.Project.Update.Info
 
             if (string.IsNullOrWhiteSpace(repositoryUrl))
             {
-                authors = projectConfiguration.RepositoryUrl;
+                repositoryUrl = projectConfiguration.RepositoryUrl;
             }
 
             if (!string.IsNullOrWhiteSpace(repositoryUrl))
