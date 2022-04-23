@@ -44,7 +44,7 @@ The project command helps with managing a project.
 
 ### Info
 
-Updates the project meta data. It reads the configuration and applies the changes to the project file.
+Updates the project meta data. It reads the configuration and applies the changes to the project files.
 
 ```
 AlinSpace.Tools.Development project update info
