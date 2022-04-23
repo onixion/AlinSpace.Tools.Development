@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace AlinSpace.Tools.Development.Commands.UpdateProject
+namespace AlinSpace.Tools.Development.Commands.Project.Update.Build
 {
-    public class UpdateProject : ICommand
+    public class Command : ICommand
     {
         public void Execute(Context context, IEnumerable<string> args)
         {
@@ -32,7 +32,7 @@ namespace AlinSpace.Tools.Development.Commands.UpdateProject
             {
                 nodes.Add(new DependencyNode()
                 {
-                    Project = Project.Open(project.PathToProjectFile),
+                    Project = ProjectManipulator.Project.Open(project.PathToProjectFile),
                 });
             }
 
@@ -48,6 +48,9 @@ namespace AlinSpace.Tools.Development.Commands.UpdateProject
             var version = node.Project.Version;
             node.Project.VersionIncrementBuild();
             var newVersion = node.Project.Version;
+
+            // Generate package on build is required for this to work.
+            node.Project.GeneratePackageOnBuild = true;
 
             // Save project.
             node.Project.Save();

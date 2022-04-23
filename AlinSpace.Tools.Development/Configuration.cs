@@ -1,6 +1,7 @@
 ﻿using AlinSpace.ProjectManipulator;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AlinSpace.Tools.Development
@@ -10,6 +11,18 @@ namespace AlinSpace.Tools.Development
         public string PathToSolutionFile { get; set; }
 
         public string PathToLocalNugetFolder { get; set; }
+
+        public IList<ProjectConfiguration> Projects { get; set; } = new List<ProjectConfiguration>();
+
+        public string Tags { get; set; } = "";
+
+        public string Authors { get; set; } = "";
+
+        public string Copyright { get; set; } = "";
+
+        public string RepositoryUrl { get; set; } = "";
+
+        public string PackageProjectUrl { get; set; } = "";
 
         public static bool TryReadFromJsonFile(string pathToConfigurationFile, out Configuration configuration)
         {
@@ -35,13 +48,20 @@ namespace AlinSpace.Tools.Development
 
         public void WriteToJsonFile(string pathToConfigurationFile)
         {
-            var jsonData = JsonConvert.SerializeObject(this);
+            var jsonData = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText(pathToConfigurationFile, jsonData);
         }
 
-        public static Configuration CreateDefault()
+        public static Configuration CreateTemplateConfiguration()
         {
-            return new Configuration();
+            var configuration = new Configuration();
+
+            configuration.Projects.Add(new ProjectConfiguration()
+            {
+                Name = "MyProject",
+            });
+
+            return configuration;
         }
     }
 }

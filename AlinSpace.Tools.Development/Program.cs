@@ -19,7 +19,7 @@ namespace AlinSpace.Tools.Development
             {
                 if (!File.Exists(pathToConfiguration))
                 {
-                    var defaultConfiguration = Configuration.CreateDefault();
+                    var defaultConfiguration = Configuration.CreateTemplateConfiguration();
 
                     var files = Directory.GetFiles(".", "*.sln");
 
@@ -41,9 +41,6 @@ namespace AlinSpace.Tools.Development
                 return;
             }
 
-            //configuration.PathToSolutionFile = @"C:\Code\Zen\AlinSpace.Zen\AlinSpace.Zen.sln";
-            //configuration.PathToLocalNugetFolder = @"C:\AlinSpace\Nuget";
-
             var context = new Context()
             {
                 Configuration = configuration,
@@ -58,7 +55,22 @@ namespace AlinSpace.Tools.Development
                         switch(args[1])
                         {
                             case "update":
-                                new Commands.UpdateProject.UpdateProject().Execute(context, args.Skip(2).ToList());
+
+                                switch(args[2])
+                                {
+                                    case "build":
+                                        new Commands.Project.Update.Build.Command().Execute(context, args.Skip(3).ToList());
+                                        break;
+
+                                    case "info":
+                                        new Commands.Project.Update.Info.Command().Execute(context, args.Skip(3).ToList());
+                                        break;
+
+                                    default:
+                                        Console.WriteLine($"Unknown command: {args[2]}");
+                                        break;
+                                }
+
                                 break;
 
                             default:

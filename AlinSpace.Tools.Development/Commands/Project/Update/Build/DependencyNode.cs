@@ -1,7 +1,7 @@
 ﻿using AlinSpace.ProjectManipulator;
 using System.Collections.Generic;
 
-namespace AlinSpace.Tools.Development.Commands.UpdateProject
+namespace AlinSpace.Tools.Development.Commands.Project.Update.Build
 {
     public class DependencyNode
     {
