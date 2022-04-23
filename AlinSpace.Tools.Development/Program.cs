@@ -80,6 +80,13 @@ namespace AlinSpace.Tools.Development
 
                         break;
 
+                    case "help":
+
+                        Console.WriteLine("Usage:");
+                        Console.WriteLine("\t project update info                     Update project information.");
+                        Console.WriteLine("\t project update build <project-name>     Build project and dependent projects.");
+                        break;
+
                     default:
                         Console.WriteLine($"Unknown command: {args[0]}");
                         break;
