@@ -6,13 +6,14 @@ using System.Linq;
 namespace AlinSpace.Tools.Development
 {
     /// <summary>
-    /// 
-    /// update AlinSpace.Zen
+    /// Represents the program.
     /// </summary>
     public static class Program
     {
         public static void Main(string[] args)
         {
+            #region Reading configuration file
+
             var pathToConfiguration = AbsolutePath.Get("AlinSpace.Tools.Development.json");
 
             if (!Configuration.TryReadFromJsonFile(pathToConfiguration, out var configuration))
@@ -41,10 +42,14 @@ namespace AlinSpace.Tools.Development
                 return;
             }
 
+            #endregion
+
             var context = new Context()
             {
                 Configuration = configuration,
             };
+
+            #region Execute command
 
             try
             {
@@ -97,6 +102,8 @@ namespace AlinSpace.Tools.Development
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
             }
+
+            #endregion
         }
     }
 }

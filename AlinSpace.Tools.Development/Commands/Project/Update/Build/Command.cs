@@ -8,6 +8,14 @@ using System.Text;
 
 namespace AlinSpace.Tools.Development.Commands.Project.Update.Build
 {
+    /// <summary>
+    /// Represents the project update build command.
+    /// </summary>
+    /// <remarks>
+    /// This command increments the build number of the project, builds it,
+    /// copies the nupkg to the local nuget folder and continues recursively 
+    /// for all dependent projects.
+    /// </remarks>
     public class Command : ICommand
     {
         public void Execute(Context context, IEnumerable<string> args)

@@ -5,6 +5,13 @@ using System.Linq;
 
 namespace AlinSpace.Tools.Development.Commands.Project.Update.Info
 {
+    /// <summary>
+    /// Represents the project update info command.
+    /// </summary>
+    /// <remarks>
+    /// This command applies all project information from the 
+    /// configuration file.
+    /// </remarks>
     public class Command : ICommand
     {
         public void Execute(Context context, IEnumerable<string> args)
