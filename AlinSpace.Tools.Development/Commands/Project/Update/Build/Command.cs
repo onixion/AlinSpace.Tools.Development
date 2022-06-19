@@ -68,6 +68,11 @@ namespace AlinSpace.Tools.Development.Commands.Project.Update.Build
             var pathToNugetPackage = BuildProjectToNugetPackage(context, node);
             CopyNugetPackageToLocalNugetPath(context, node, pathToNugetPackage);
 
+            if(context.Configuration.BuildInDebugConfiguration.GetValueOrDefault())
+            {
+                CopyDebugFileToLocalNugetPath(context, node, pathToNugetPackage);
+            }
+
             node.Updated = true;
 
             // Get dependent nodes.
@@ -113,17 +118,45 @@ namespace AlinSpace.Tools.Development.Commands.Project.Update.Build
             Console.WriteLine($"Copied nuget package {Path.GetFileName(pathToNugetPackage)} to {destinationPathToNupkg}.");
         }
 
+        private void CopyDebugFileToLocalNugetPath(Context context, DependencyNode node, string pathToNugetPackage)
+        {
+            var pathToDebugFile = Path.Combine(
+                Path.GetDirectoryName(pathToNugetPackage),
+                "net6.0",
+                $"{node.Project.Name}.pdb");
+
+            if (!File.Exists(pathToDebugFile))
+            {
+                Console.WriteLine($"Debug file could not be found: {pathToDebugFile}");
+                return;
+            }
+
+            var pathToDebugFiles = AbsolutePath.Get(context.Configuration.PathToDebugFiles ?? context.Configuration.PathToLocalNugetFolder);
+
+            var pathToDebugFileDestination = Path.Combine(
+                pathToDebugFiles,
+                $"{node.Project.Name}.pdb");
+
+            if (!Directory.Exists(pathToDebugFiles))
+                Directory.CreateDirectory(pathToDebugFiles);
+
+            File.Copy(pathToDebugFile, pathToDebugFileDestination, true);
+            Console.WriteLine($"Copied debug file {Path.GetFileName(pathToDebugFile)} to {pathToDebugFileDestination}.");
+        }
+
         string BuildProjectToNugetPackage(Context context, DependencyNode node)
         {
             Console.WriteLine($"Building project {node.Project.Name} ...");
 
-            var process = Process.Start("dotnet", $"build {node.Project.PathToProjectFile} -c Release");
+            var buildInDebug = context.Configuration.BuildInDebugConfiguration.GetValueOrDefault();
+
+            var process = Process.Start("dotnet", $"build {node.Project.PathToProjectFile} -c {(buildInDebug ? "DEBUG" : "RELEASE")}");
             process.WaitForExit();
 
             var pathToNupkg = Path.Combine(
                 Path.GetDirectoryName(node.Project.PathToProjectFile),
                 "bin",
-                "release",
+                buildInDebug ? "debug" : "release",
                 $"{node.Project.Name}.{node.Project.Version}.nupkg");
 
             return pathToNupkg;

@@ -22,6 +22,17 @@ namespace AlinSpace.Tools.Development
         public string PathToLocalNugetFolder { get; set; }
 
         /// <summary>
+        /// Gets or sets the flag indicating whether to build the nuget package in
+        /// the DEBUG configuration.
+        /// </summary>
+        public bool? BuildInDebugConfiguration { get; set; }
+
+        /// <summary>
+        /// Gets or sets the path to store the debug files (if not set will use the PathToLocalNugetFolder).
+        /// </summary>
+        public string PathToDebugFiles { get; set; }
+
+        /// <summary>
         /// Gets or sets the project configurations.
         /// </summary>
         public IList<ProjectConfiguration> Projects { get; set; } = new List<ProjectConfiguration>();
